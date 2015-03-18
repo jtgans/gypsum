@@ -1,0 +1,61 @@
+* Gypsum: an s-expr aware display server for Android
+
+Gypsum is a super-simplistic graphics display server for Android, designed to
+provide a display to a Bluetooth RFCOMM-connected headless device for the Navi
+project. It was originally designed as part of the Navi project to be run on
+Google Glass (though it works on virtually any Android device), with a paired
+Intel Edison as the core "mote" of the wearable system.
+
+Gypsum's design is heavily influenced by Common Lisp and it's base
+representation type, s-expressions. Currently incoming s-expressions are parsed
+in through Java's highly inefficient =StreamTokenizer= class -- this needs to
+change, and will likely move to a native C/C++ implementation, one that makes
+use of a proper lisp reader, possibly even implemented entirely in =ecl=.
+
+Note: Gypsum and the Gypsum display protocol are in constant flux. This code is
+pre-alpha quality, and has not seen much testing. I can prove that it works for
+me, but it may not work for your usage goals.
+
+** Building
+
+Building Gypsum is fairly simplistic at the moment. You'll need the following
+prerequisites:
+
+  - Apache Ant
+  - Android SDK (at least API 19 -- Google Glass extensions are largely unused)
+  - Java JDK (at least 1.5)
+
+Building is done entirely through the command line. Once you have the
+prerequisites installed, you'll need to do the following inside the root of the
+source tree:
+
+  1. =$ android update project -p . -n Gypsum -t android-19=
+  2. Start your AVD instance, or connect a real device via USB. If using an AVD,
+     wait for it to finish starting and ensure "debug over USB" is turned on in
+     the Developer menu first.
+  3. =$ ant debug install=
+  4. Start Gypsum from the Android launcher.
+
+** Running
+
+At this point, one of two things will happen, depending on what kind of device
+Gypsum is running on.
+
+*** Running on an AVD
+
+Since there's no effective way of testing Gypsum via a "loopback Bluetooth"
+connection, it's approximated via a local TCP socket. You'll need to connect to
+the local port for your AVD instance and redirect TCP socket 5555 to your host
+machine before you can connect.
+
+Once that's done, you should be able to issue s-expressions to the Gypsum
+instance running on the device via =telnet localhost <redirected-port>=.
+
+*** Running on a real device
+
+On a real device, Gypsum actually listens over an RFCOMM instance. How you
+connect to it is implementation defined. Most Nexus devices (running bluedroid)
+start numbering their RFCOMM connections at port number 5.
+
+Gypsum registers itself as the UUID =199d6fc0-adcb-11e4-a32c-6c4008a5fbd2=, so
+an SDP scan for that service UUID should turn up the proper port.

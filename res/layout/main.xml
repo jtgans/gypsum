@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/layout"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+
+  <com.theonelab.navi.gypsum.DisplayView
+      android:id="@+id/display"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      />
+
+  <TextView
+      android:id="@+id/disconnected"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:text="@string/disconnected"
+      android:editable="false"
+      android:gravity="center_vertical|center_horizontal"
+      android:shadowColor="#000"
+      android:shadowDx="0.0"
+      android:shadowDy="0.0"
+      android:shadowRadius="5.0"
+      android:textColor="#fff"
+      android:textSize="40dp"
+      android:textStyle="bold"
+      android:typeface="sans"
+      />
+
+  <TextView
+      android:id="@+id/connected"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:text="@string/connected"
+      android:visibility="gone"
+      android:editable="false"
+      android:gravity="center_vertical|center_horizontal"
+      android:shadowColor="#000"
+      android:shadowDx="0.0"
+      android:shadowDy="0.0"
+      android:shadowRadius="5.0"
+      android:textColor="#fff"
+      android:textSize="40dp"
+      android:textStyle="bold"
+      android:typeface="sans"
+      />
+
+</FrameLayout>

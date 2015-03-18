@@ -1,0 +1,15 @@
+# Ignore Android generated files
+bin/
+local.properties
+project.properties
+
+# Ignore GNU Global droppings
+GPATH
+GRTAGS
+GTAGS
+
+# Prevent inclusion of Envy Code R fonts
+# TODO(jtgans): Move to a lisp machine font?
+assets/envy_code_r.ttf
+assets/envy_code_r_bold.ttf
+assets/envy_code_r_italic.tff
