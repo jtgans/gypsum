@@ -292,7 +292,6 @@ public class CommandParser implements Runnable {
               Log.e(TAG, "Unrecognized bareword [" + tokenizer.sval + "]");
               return null;
             }
-
             break;
 
           case StreamTokenizer.TT_NUMBER:
@@ -311,9 +310,10 @@ public class CommandParser implements Runnable {
               return null;
             }
 
+            // This is the start of the command in the plist. Continue so we can
+            // grab it the next time around.
             if (command == null) {
-              Log.e(TAG, "Premature start of plist -- no command found!");
-              return null;
+              continue;
             }
 
             String paramName = CommandParser.parseParamSymbol(tokenizer);
@@ -457,7 +457,7 @@ public class CommandParser implements Runnable {
         return parseCoordinate(tokenizer, value);
 
       default:
-        Log.e(TAG, "Unexpected character '" + token + "' in plist value!");
+        Log.e(TAG, "Unexpected character '" + (char)(token) + "' in plist value!");
         return false;
     }
   }
