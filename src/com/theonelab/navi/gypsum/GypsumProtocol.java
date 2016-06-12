@@ -6,7 +6,7 @@ import java.util.UUID;
  * Simple interface that simply exists to contain various extra bits of
  * information about the Gypsum protocol.
  *
- * Things like the RFCOMM service UUID, Protocol version, and other ancilliary
+ * Things like the RFCOMM service UUID, Protocol version, and other ancillary
  * information live here.
  */
 public interface GypsumProtocol {
